@@ -10,6 +10,7 @@
 <svelte:window on:scroll={onScroll} />
 
 <figure class="ball center">
+	<span class="shadow" />
 	<div class="panels scroll-animated">
 		<div class="number-panel center scroll-animated front">8</div>
 		<div class="back-panel center scroll-animated back">bla</div>
@@ -42,14 +43,49 @@
 	}
 
 	.ball {
+		position: relative;
+		background: radial-gradient(circle at 50% 120%, #323232, #0a0a0a 80%, #000000 100%);
 		width: var(--size);
 		aspect-ratio: 1;
-		background-color: black;
-		box-shadow: inset -1vmin 0vmin 4vmin rgba(255, 255, 255, 0.2), 0 4vmin 8vmin rgba(0, 0, 0, 0.5);
-		background-image: linear-gradient(-45deg, rgba(255, 255, 220, 0.3) 0%, transparent 100%);
+		box-shadow: inset -1vmin 0vmin 4vmin rgba(255, 255, 255, 0.2), 0 4vmin 8vmin rgba(0, 0, 0, 0.8);
 
 		border-radius: 50%;
 		overflow: hidden;
+	}
+	.ball:before {
+		content: '';
+		position: absolute;
+		background: radial-gradient(
+			circle at 50% 120%,
+			rgba(255, 255, 255, 0.5),
+			rgba(255, 255, 255, 0) 70%
+		);
+		border-radius: 50%;
+		bottom: 2.5%;
+		left: 5%;
+		opacity: 0.3;
+		height: 100%;
+		width: 90%;
+		filter: blur(2vmin);
+		z-index: 2;
+	}
+	.ball:after {
+		width: 100%;
+		height: 100%;
+		content: '';
+		position: absolute;
+		top: 5%;
+		left: 10%;
+		border-radius: 50%;
+		background: radial-gradient(
+			circle at 50% 50%,
+			rgba(255, 255, 255, 0.8),
+			rgba(255, 255, 255, 0.8) 14%,
+			rgba(255, 255, 255, 0) 24%
+		);
+		opacity: 0.5;
+		transform: translateX(-20vmin) translateY(-24vmin) skewX(-20deg);
+		filter: blur(4vmin);
 	}
 
 	@keyframes ball-flip {
@@ -129,5 +165,18 @@
 		color: black;
 		font-family: sans-serif;
 		font-size: var(--panel-size);
+	}
+	.shadow {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: var(--size);
+		height: var(--size);
+		background: radial-gradient(
+			circle at 50% 50%,
+			rgba(0, 0, 0, 0.4),
+			rgba(0, 0, 0, 0.1) 40%,
+			rgba(0, 0, 0, 0) 50%
+		);
 	}
 </style>
