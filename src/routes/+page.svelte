@@ -25,6 +25,7 @@
 		}
 	}
 	.wallpaper {
+		display: none;
 		position: fixed;
 		z-index: -1000;
 		top: -10vh;
