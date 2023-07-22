@@ -1,36 +1,38 @@
 <script lang="ts">
 	const THRESHOLD = 0.3;
-	const answers = [
-		'It is certain.',
-		'It is decidedly so.',
-		'Without a doubt.',
-		'Yes – definitely.',
-		'You may rely on it.',
-		'As I see it, yes.',
-		'Most likely.',
-		'Outlook good.',
-		'Yes.',
-		'Signs point to yes.',
-		'Reply hazy, try again.',
-		'Ask again later.',
-		'Better not tell you now.',
-		'Cannot predict now.',
-		'Concentrate and ask again.',
-		"Don't count on it.",
-		'My reply is no.',
-		'My sources say no.',
-		'Outlook not so good.',
-		'Very doubtful.'
+	type response = [string, 'up' | 'down'];
+	const answers: response[] = [
+		['It is\ncertain.', 'up'],
+		['It is\ndecidedly so.', 'up'],
+		['Without\na doubt.', 'down'],
+		['Yes\n–\ndefinitely.', 'up'],
+		['You may rely\non it.', 'down'],
+		['As I see it,\nyes.', 'down'],
+		['Most\nlikely.', 'up'],
+		['Outlook\ngood.', 'up'],
+		['Yes.', 'up'],
+		['Nope.', 'down'],
+		['Signs\npoint to yes.', 'up'],
+		['Reply hazy,\ntry again.', 'down'],
+		['Ask again\nlater.', 'down'],
+		['Better\nnot tell\nyou now.', 'down'],
+		['Cannot\npredict\nnow.', 'down'],
+		['Concentrate\nand ask\nagain.', 'down'],
+		["Don't\ncount on it.", 'up'],
+		['My reply is\nno.', 'down'],
+		['My sources say\nno.', 'down'],
+		['Outlook\nnot so good.', 'up'],
+		['Very\ndoubtful.', 'up']
 	];
 
 	let answerIndex = 0;
 
 	$: answer = answers[answerIndex];
-	let point: 'up' | 'down' = 'up';
+	$: answerLines = answer[0].split('\n');
+	$: point = answer[1];
 
 	function updateAnswer() {
 		answerIndex = Math.floor(Math.random() * answers.length);
-		point = Math.random() > 0.5 ? 'up' : 'down';
 	}
 
 	let prevPercent = 0;
@@ -55,7 +57,11 @@
 	<div class="panels scroll-animated">
 		<div class="number-panel center scroll-animated front">8</div>
 		<div class="back-panel center scroll-animated back">
-			<div class={'answer ' + point}>{answer}</div>
+			<div class={'answer ' + point}>
+				{#each answerLines as line}
+					<div>{line}</div>
+				{/each}
+			</div>
 		</div>
 	</div>
 </figure>
@@ -232,6 +238,7 @@
 		position: relative;
 		justify-content: center;
 		align-items: center;
+		flex-direction: column;
 		display: flex;
 		width: 18vmin;
 		height: 20.8vmin;
