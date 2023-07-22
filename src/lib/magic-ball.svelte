@@ -1,9 +1,50 @@
 <script lang="ts">
+	const THRESHOLD = 0.3;
+	const answers = [
+		'It is certain.',
+		'It is decidedly so.',
+		'Without a doubt.',
+		'Yes – definitely.',
+		'You may rely on it.',
+		'As I see it, yes.',
+		'Most likely.',
+		'Outlook good.',
+		'Yes.',
+		'Signs point to yes.',
+		'Reply hazy, try again.',
+		'Ask again later.',
+		'Better not tell you now.',
+		'Cannot predict now.',
+		'Concentrate and ask again.',
+		"Don't count on it.",
+		'My reply is no.',
+		'My sources say no.',
+		'Outlook not so good.',
+		'Very doubtful.'
+	];
+
+	let answerIndex = 0;
+
+	$: answer = answers[answerIndex];
+	let point: 'up' | 'down' = 'up';
+
+	function updateAnswer() {
+		answerIndex = Math.floor(Math.random() * answers.length);
+		point = Math.random() > 0.5 ? 'up' : 'down';
+	}
+
+	let prevPercent = 0;
+
 	function onScroll() {
 		const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 		const maxScrollTop = scrollHeight - clientHeight;
 		const percent = scrollTop / maxScrollTop;
 		document.documentElement.style.setProperty('--frame', percent.toString());
+
+		if (prevPercent < THRESHOLD && percent > THRESHOLD) {
+			updateAnswer();
+		}
+		prevPercent = percent;
 	}
 </script>
 
@@ -14,7 +55,7 @@
 	<div class="panels scroll-animated">
 		<div class="number-panel center scroll-animated front">8</div>
 		<div class="back-panel center scroll-animated back">
-			<div class="answer down">bla</div>
+			<div class={'answer ' + point}>{answer}</div>
 		</div>
 	</div>
 </figure>

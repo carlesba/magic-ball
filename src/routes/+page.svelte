@@ -5,11 +5,14 @@
 </script>
 
 <Header />
+
+<div class="snap-start" />
 <div class="page">
 	<div class="fix center pattern">
 		<MagicBall />
 	</div>
 </div>
+<div class="snap-end" />
 
 <style>
 	.pattern {
@@ -22,10 +25,12 @@
 		justify-content: center;
 		align-items: center;
 	}
+	:global(body) {
+		margin: 0;
+	}
 	.page {
 		height: 300vh;
 		width: 100vw;
-		overflow: scroll;
 	}
 	.fix {
 		position: fixed;
