@@ -156,6 +156,8 @@
 		color: black;
 		font-family: sans-serif;
 		font-size: var(--panel-size);
+		text-shadow: 0 0.2vmin 0.2vmin black;
+		box-shadow: inset 0 0.2vmin 0.2vmin black;
 	}
 	.back-panel {
 		width: var(--panel-size);
