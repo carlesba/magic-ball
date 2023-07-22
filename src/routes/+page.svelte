@@ -26,6 +26,7 @@
 	}
 	.wallpaper {
 		position: fixed;
+		z-index: -1000;
 		top: -10vh;
 		left: -10vw;
 		width: 120vw;
