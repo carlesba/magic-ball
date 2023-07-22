@@ -10,10 +10,12 @@
 <svelte:window on:scroll={onScroll} />
 
 <figure class="ball center">
-	<span class="shadow" />
+	<span class="stage-shadow" />
 	<div class="panels scroll-animated">
 		<div class="number-panel center scroll-animated front">8</div>
-		<div class="back-panel center scroll-animated back">bla</div>
+		<div class="back-panel center scroll-animated back">
+			<div class="answer down">bla</div>
+		</div>
 	</div>
 </figure>
 
@@ -86,6 +88,20 @@
 		opacity: 0.5;
 		transform: translateX(-20vmin) translateY(-24vmin) skewX(-20deg);
 		filter: blur(4vmin);
+	}
+	.stage-shadow {
+		position: absolute;
+		z-index: 1;
+		top: 0;
+		left: 0;
+		width: var(--size);
+		height: var(--size);
+		background: radial-gradient(
+			circle at 50% 50%,
+			rgba(0, 0, 0, 0.4),
+			rgba(0, 0, 0, 0.1) 40%,
+			rgba(0, 0, 0, 0) 50%
+		);
 	}
 
 	@keyframes ball-flip {
@@ -163,22 +179,79 @@
 		width: var(--panel-size);
 		height: var(--panel-size);
 		border-radius: 50%;
-		background-color: white;
-		color: black;
+		background-color: black;
+		border: 0.2vmin solid rgba(200, 200, 200, 0.2);
+
 		font-family: sans-serif;
 		font-size: var(--panel-size);
+		z-index: 10000;
+		overflow: hidden;
 	}
-	.shadow {
+	.answer {
+		position: relative;
+		justify-content: center;
+		align-items: center;
+		display: flex;
+		width: 18vmin;
+		height: 20.8vmin;
+		color: white;
+		text-align: center;
+		font-family: sans-serif;
+		font-variant: small-caps;
+		font-size: 2.1vmin;
+		line-height: 2.4vmin;
+		transition: opacity 1s;
+		animation: floating 6s linear infinite;
+	}
+
+	/* Triangle */
+	.answer::before {
+		content: '';
+		z-index: -1;
 		position: absolute;
-		top: 0;
 		left: 0;
-		width: var(--size);
-		height: var(--size);
-		background: radial-gradient(
-			circle at 50% 50%,
-			rgba(0, 0, 0, 0.4),
-			rgba(0, 0, 0, 0.1) 40%,
-			rgba(0, 0, 0, 0) 50%
-		);
+		border-left: 8.8vmin solid transparent;
+		border-right: 8.8vmin solid transparent;
+		border-radius: 0.4vmin;
+		width: 0.4vmin;
+		height: 0;
+	}
+
+	.answer.up::before {
+		top: 0.4vmin;
+		border-bottom: 15.2vmin solid #1c23e8;
+	}
+
+	.answer.down::before {
+		bottom: 0.4vmin;
+		border-top: 15.2vmin solid #1c23e8;
+	}
+
+	/* Overlay */
+	.answer::after {
+		content: '';
+		z-index: 100;
+		position: absolute;
+		left: -7vmin;
+		top: -5vmin;
+		border-radius: 50%;
+		width: 32vmin;
+		height: 32vmin;
+		background: linear-gradient(to left, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+		animation: rotating 6s infinite linear;
+	}
+	/* Triangle gently floating around */
+	@keyframes floating {
+		from {
+			transform: rotateZ(0) rotateY(15deg) translateZ(6.8vmin) rotateZ(0);
+		}
+		to {
+			transform: rotateZ(1turn) rotateY(15deg) translateZ(6.8vmin) rotateZ(-1turn);
+		}
+	}
+	@keyframes rotating {
+		to {
+			transform: rotate(1turn);
+		}
 	}
 </style>
