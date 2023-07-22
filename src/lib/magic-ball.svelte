@@ -11,8 +11,8 @@
 
 <figure class="ball center">
 	<div class="panels scroll-animated">
-		<div class="number-panel center scroll-animated">8</div>
-		<div class="back-panel center scroll-animated">bla</div>
+		<div class="number-panel center scroll-animated front">8</div>
+		<div class="back-panel center scroll-animated back">bla</div>
 	</div>
 </figure>
 
@@ -21,7 +21,7 @@
 		--size: 70vmin;
 		--panel-size: 35vmin;
 		background-color: #a0a0a0;
-		--frame: 0.5;
+		--frame: 0;
 	}
 
 	.scroll-animated {
@@ -63,28 +63,56 @@
 	.panels {
 		width: var(--panel-size);
 		height: var(--panel-size);
+
 		transform-style: preserve-3d;
 		animation-name: ball-flip;
 		transform: rotateX(0deg);
-		animation-timing-function: linear;
-		transform-style: preserve-3d;
 		perspective-origin: center;
 	}
 	.panels > div {
 		position: absolute;
+		top: 0;
+		left: 0;
 	}
-
 	@keyframes front {
 		0% {
-			visibility: hidden;
+			opacity: 1;
 		}
-		50% {
-			visibility: hidden;
+		29% {
+			opacity: 1;
 		}
+		30% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 0;
+		}
+	}
+	@keyframes back {
+		0% {
+			opacity: 0;
+		}
+		29% {
+			opacity: 0;
+		}
+		30% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+	.front {
+		opacity: 1;
+		animation-name: front;
+		transform: translateZ(35vmin);
+	}
+	.back {
+		animation-name: back;
+		transform: translateZ(-35vmin) rotateX(180deg);
 	}
 
 	.number-panel {
-		transform: translateZ(35vmin);
 		width: var(--panel-size);
 		height: var(--panel-size);
 		border-radius: 50%;
@@ -92,11 +120,8 @@
 		color: black;
 		font-family: sans-serif;
 		font-size: var(--panel-size);
-		animation: front;
 	}
 	.back-panel {
-	visibility: hidden;
-		transform: translateZ(-35vmin) rotateX(180deg);
 		width: var(--panel-size);
 		height: var(--panel-size);
 		border-radius: 50%;
