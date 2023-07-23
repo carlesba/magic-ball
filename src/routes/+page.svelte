@@ -46,7 +46,7 @@
 		margin: 0;
 	}
 	.page {
-		height: 300vh;
+		height: 200vh;
 		width: 100vw;
 	}
 	.fix {
