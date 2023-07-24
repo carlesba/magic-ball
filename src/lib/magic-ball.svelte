@@ -1,5 +1,7 @@
 <script lang="ts">
 	const THRESHOLD = 0.3;
+	const TIME_TO_DEMO = 5_000;
+
 	type response = [string, 'up' | 'down'];
 	const answers: response[] = [
 		['It is\ncertain.', 'up'],
@@ -36,8 +38,10 @@
 	}
 
 	let prevPercent = 0;
+	let status: 'idle' | 'used' = 'idle';
 
 	function onScroll() {
+		status = 'used';
 		const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 		const maxScrollTop = scrollHeight - clientHeight;
 		const percent = scrollTop / maxScrollTop;
@@ -48,6 +52,35 @@
 		}
 		prevPercent = percent;
 	}
+
+	function delayAnimation(fn: () => void) {
+		setTimeout(fn, 600);
+	}
+
+	function demoScroll() {
+		if (typeof document !== 'object') {
+			return;
+		}
+		const height = document.documentElement.offsetHeight;
+		const scrollHeight = 0.15 * height;
+		document.documentElement.scrollTo({ top: scrollHeight, behavior: 'smooth' });
+		// Scroll back to top
+		delayAnimation(() => {
+			document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
+			delayAnimation(() => {
+				status = 'idle';
+				setDemo();
+			});
+		});
+	}
+	function setDemo() {
+		setTimeout(() => {
+			if (status === 'idle') {
+				demoScroll();
+			}
+		}, TIME_TO_DEMO);
+	}
+	setDemo();
 </script>
 
 <svelte:window on:scroll={onScroll} />
@@ -208,7 +241,7 @@
 	}
 	.back {
 		animation-name: back;
-		transform: translateZ(calc(var(--half-size)*-1)) rotateX(180deg);
+		transform: translateZ(calc(var(--half-size) * -1)) rotateX(180deg);
 	}
 
 	.number-panel {

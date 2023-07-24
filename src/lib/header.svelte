@@ -3,6 +3,7 @@
 	function toggleHelp(e: MouseEvent) {
 		e.preventDefault();
 		help = !help;
+		document.documentElement.style.setProperty('--frame', '0');
 	}
 </script>
 
@@ -16,22 +17,27 @@
 		<a class="link-ball" href="/" on:click={toggleHelp} aria-label="close help">X</a>
 	</div>
 	<h1>Magic ball</h1>
-
-	<p>
-		The magic ball can help you make decisions. Whenever you feel lost, ask the ball for advice.
-	</p>
-	<p>
-		Just think of a question that can be answered <i>Yes</i> or <i>No</i>, concentrate very, very
-		hard, and <i>scroll down to know the answer</i>.
-	</p>
-	<p>Explore <b>your feelings</b> and discover what your mind wants to tell you.</p>
-	<p>Scroll up to start over.</p>
-	<hr />
-	<p class="small">
-		Done with Svelte by <a href="https://github.com/carlesba" aria-label="author" target="_blank"
-			>Carles Ballester</a
-		>
-	</p>
+	<article>
+		<p>
+			The magic ball can help you make decisions. Whenever you feel lost, ask the ball for advice.
+		</p>
+		<p>
+			Just think of a question that can be answered with <i>Yes</i> or <i>No</i>. Concentrate very,
+			very hard, and <i>scroll down to know the answer</i>.
+		</p>
+		<p>
+			After reading the answer, explore <b>your feelings</b> and discover what your mind wants to tell
+			you. If you're not confortable with the answer, maybe you should go for the opposite one. Sometimes,
+			your feelings know more than your own reason.
+		</p>
+		<p>Scroll up to start over.</p>
+		<hr />
+		<p class="small">
+			Done with Svelte by <a href="https://github.com/carlesba" aria-label="author" target="_blank"
+				>Carles Ballester</a
+			>
+		</p>
+	</article>
 </aside>
 
 <style>
@@ -43,7 +49,7 @@
 		z-index: 1;
 	}
 	.menu {
-		position: absolute;
+		position: fixed;
 		right: 1vmin;
 		top: 1vmin;
 		display: flex;
@@ -66,9 +72,9 @@
 		text-align: center;
 
 		text-shadow: 0 0.1vmin 0.1vmin rgba(0, 0, 0, 0.5);
-		border: 1.5vmin solid #232323;
+		border: 2.5vmin solid #232323;
 		color: black;
-		font-size: 2vmin;
+		font-size: 4vmin;
 		background: white;
 		font-family: sans-serif;
 	}
@@ -87,6 +93,7 @@
 		color: white;
 		font-size: 40px;
 		text-shadow: 2px 8px 10px rgba(0, 0, 0, 0.8);
+		overflow-y: auto;
 	}
 	.modal h1 {
 		text-align: center;

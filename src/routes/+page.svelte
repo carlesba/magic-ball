@@ -4,11 +4,6 @@
 	import MagicBall from '$lib/magic-ball.svelte';
 </script>
 
-<svelte:head>
-	<title>Magic ball</title>
-	<description>A magic ball game done with Svelte by @carlesba</description>
-</svelte:head>
-
 <Header />
 
 <div class="snap-start" />
