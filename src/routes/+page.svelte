@@ -4,6 +4,11 @@
 	import MagicBall from '$lib/magic-ball.svelte';
 </script>
 
+<svelte:head>
+	<title>Magic ball</title>
+	<description>A magic ball game done with Svelte by @carlesba</description>
+</svelte:head>
+
 <Header />
 
 <div class="snap-start" />
@@ -16,6 +21,11 @@
 <div class="snap-end" />
 
 <style>
+	:root {
+		--bg: #a0a0a0;
+		--bg: #315332;
+		background-color: var(--bg);
+	}
 	@keyframes floating {
 		from {
 			transform: rotateZ(0) rotateX(-10deg) translateZ(6.8vmin) rotateZ(0);

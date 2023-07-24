@@ -68,9 +68,9 @@
 
 <style>
 	:root {
-		--size: 70vmin;
-		--panel-size: 35vmin;
-		background-color: #a0a0a0;
+		--size: 90vmin;
+		--half-size: 45vmin;
+		--panel-size: 40vmin;
 		--frame: 0;
 	}
 
@@ -204,11 +204,11 @@
 	.front {
 		opacity: 1;
 		animation-name: front;
-		transform: translateZ(35vmin);
+		transform: translateZ(var(--half-size));
 	}
 	.back {
 		animation-name: back;
-		transform: translateZ(-35vmin) rotateX(180deg);
+		transform: translateZ(calc(var(--half-size)*-1)) rotateX(180deg);
 	}
 
 	.number-panel {
