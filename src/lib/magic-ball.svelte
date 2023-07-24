@@ -22,7 +22,7 @@
 		['Concentrate\nand ask\nagain.', 'down'],
 		["Don't\ncount on it.", 'up'],
 		['My reply is\nno.', 'down'],
-		['My sources say\nno.', 'down'],
+		['My sources\nsay\nno.', 'down'],
 		['Outlook\nnot so good.', 'up'],
 		['Very\ndoubtful.', 'up']
 	];
@@ -38,10 +38,12 @@
 	}
 
 	let prevPercent = 0;
-	let status: 'idle' | 'used' = 'idle';
+	let status: 'idle' | 'demoing' | 'used' = 'idle';
 
 	function onScroll() {
-		status = 'used';
+		if (status !== 'demoing') {
+			status = 'used';
+		}
 		const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 		const maxScrollTop = scrollHeight - clientHeight;
 		const percent = scrollTop / maxScrollTop;
@@ -61,6 +63,10 @@
 		if (typeof document !== 'object') {
 			return;
 		}
+		if (status === 'used') {
+			return;
+		}
+		status = 'demoing';
 		const height = document.documentElement.offsetHeight;
 		const scrollHeight = 0.15 * height;
 		document.documentElement.scrollTo({ top: scrollHeight, behavior: 'smooth' });
@@ -101,9 +107,9 @@
 
 <style>
 	:root {
-		--size: 90vmin;
-		--half-size: 45vmin;
-		--panel-size: 40vmin;
+		--size: 96vmin;
+		--half-size: 48vmin;
+		--panel-size: 44vmin;
 		--frame: 0;
 	}
 
