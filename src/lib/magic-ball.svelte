@@ -4,27 +4,27 @@
 
 	type response = [string, 'up' | 'down'];
 	const answers: response[] = [
-		['It is\ncertain.', 'up'],
-		['It is\ndecidedly so.', 'up'],
-		['Without\na doubt.', 'down'],
-		['Yes\n–\ndefinitely.', 'up'],
-		['You may rely\non it.', 'down'],
-		['As I see it,\nyes.', 'down'],
-		['Most\nlikely.', 'up'],
-		['Outlook\ngood.', 'up'],
-		['Yes.', 'up'],
-		['Nope.', 'down'],
-		['Signs\npoint to yes.', 'up'],
-		['Reply hazy,\ntry again.', 'down'],
-		['Ask again\nlater.', 'down'],
-		['Better\nnot tell\nyou now.', 'down'],
-		['Cannot\npredict\nnow.', 'down'],
-		['Concentrate\nand ask\nagain.', 'down'],
-		["Don't\ncount on it.", 'up'],
-		['My reply is\nno.', 'down'],
-		['My sources\nsay\nno.', 'down'],
-		['Outlook\nnot so good.', 'up'],
-		['Very\ndoubtful.', 'up']
+		['it is\ncertain.', 'up'],
+		['it is\ndecidedly so.', 'up'],
+		['without\na doubt.', 'down'],
+		['yes\n–\ndefinitely.', 'up'],
+		['you may rely\non it.', 'down'],
+		['as I see it,\nyes.', 'down'],
+		['most\nlikely.', 'up'],
+		['outlook\ngood.', 'up'],
+		['yes.', 'up'],
+		['nope.', 'down'],
+		['signs\npoint to yes.', 'up'],
+		['reply hazy,\ntry again.', 'down'],
+		['ask again\nlater.', 'down'],
+		['better\nnot tell\nyou now.', 'down'],
+		['cannot\npredict\nnow.', 'down'],
+		['concentrate\nand ask\nagain.', 'down'],
+		["don't\ncount on it.", 'up'],
+		['my reply is\nno.', 'down'],
+		['my sources\nsay\nno.', 'down'],
+		['outlook\nnot so good.', 'up'],
+		['very\ndoubtful.', 'up']
 	];
 
 	let answerIndex = 0;
@@ -110,6 +110,8 @@
 		--size: 96vmin;
 		--half-size: 48vmin;
 		--panel-size: 44vmin;
+		--triangle-size: 30vmin;
+		--overlay-position: calc(var(--triangle-size)-var(--panel-size));
 		--frame: 0;
 	}
 
@@ -279,14 +281,14 @@
 		align-items: center;
 		flex-direction: column;
 		display: flex;
-		width: 18vmin;
-		height: 20.8vmin;
+		height: calc(0.8*var(--triangle-size));
+		width: calc(0.6*var(--triangle-size));
 		color: white;
 		text-align: center;
 		font-family: sans-serif;
 		font-variant: small-caps;
-		font-size: 2.1vmin;
-		line-height: 2.4vmin;
+		font-size: 3vmin;
+		line-height: 3vmin;
 		transition: opacity 1s;
 		animation: floating 6s linear infinite;
 	}
@@ -296,22 +298,22 @@
 		content: '';
 		z-index: -1;
 		position: absolute;
-		left: 0;
-		border-left: 8.8vmin solid transparent;
-		border-right: 8.8vmin solid transparent;
+		left: calc(-0.2*var(--triangle-size));
+		border-left: calc(0.5*var(--triangle-size)) solid transparent;
+		border-right: calc(0.5*var(--triangle-size)) solid transparent;
 		border-radius: 0.4vmin;
-		width: 0.4vmin;
+		width: calc(0.02*var(--triangle-size));
 		height: 0;
 	}
 
 	.answer.up::before {
-		top: 0.4vmin;
-		border-bottom: 15.2vmin solid #1c23e8;
+		top: calc(-0.05*var(--triangle-size));
+		border-bottom: calc(0.8*var(--triangle-size)) solid #1c23e8;
 	}
 
 	.answer.down::before {
-		bottom: 0.4vmin;
-		border-top: 15.2vmin solid #1c23e8;
+		top: calc(0.15*var(--triangle-size));
+		border-top: calc(0.8*var(--triangle-size)) solid #1c23e8;
 	}
 
 	/* Overlay */
@@ -319,11 +321,11 @@
 		content: '';
 		z-index: 100;
 		position: absolute;
-		left: -7vmin;
-		top: -5vmin;
 		border-radius: 50%;
-		width: 32vmin;
-		height: 32vmin;
+		left: var(--overlay-position);
+		top: var(--overlay-position);
+		width: var(--panel-size);
+		height: var(--panel-size);
 		background: linear-gradient(to left, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
 		animation: rotating 6s infinite linear;
 	}
