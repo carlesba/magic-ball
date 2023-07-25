@@ -4,27 +4,26 @@
 
 	type response = [string, 'up' | 'down'];
 	const answers: response[] = [
-		['it is\ncertain.', 'up'],
-		['it is\ndecidedly so.', 'up'],
-		['without\na doubt.', 'down'],
-		['yes\n–\ndefinitely.', 'up'],
-		['you may rely\non it.', 'down'],
-		['as I see it,\nyes.', 'down'],
-		['most\nlikely.', 'up'],
-		['outlook\ngood.', 'up'],
-		['yes.', 'up'],
-		['nope.', 'down'],
-		['signs\npoint to yes.', 'up'],
-		['reply hazy,\ntry again.', 'down'],
-		['ask again\nlater.', 'down'],
-		['better\nnot tell\nyou now.', 'down'],
-		['cannot\npredict\nnow.', 'down'],
-		['concentrate\nand ask\nagain.', 'down'],
-		["don't\ncount on it.", 'up'],
-		['my reply is\nno.', 'down'],
-		['my sources\nsay\nno.', 'down'],
-		['outlook\nnot so good.', 'up'],
-		['very\ndoubtful.', 'up']
+		['It is\ncertain.', 'up'],
+		['It is\ndecidedly so.', 'up'],
+		['Without\na doubt.', 'down'],
+		['Yes\n–\ndefinitely.', 'up'],
+		['You may rely\non it.', 'down'],
+		['As I\nsee it,\nyes.', 'down'],
+		['Most\nlikely.', 'up'],
+		['Outlook\ngood.', 'up'],
+		['Yes.', 'up'],
+		['Signs\npoint to yes.', 'up'],
+		['Reply hazy,\ntry again.', 'down'],
+		['Ask again\nlater.', 'down'],
+		['Better\nnot tell\nyou now.', 'down'],
+		['Cannot\npredict\nnow.', 'down'],
+		['Concentrate\nand ask\nagain.', 'down'],
+		["Don't\ncount on it.", 'up'],
+		['My reply is\nno.', 'down'],
+		['My sources\nsay\nno.', 'down'],
+		['Outlook\nnot so good.', 'up'],
+		['Very\ndoubtful.', 'up']
 	];
 
 	let answerIndex = 0;
